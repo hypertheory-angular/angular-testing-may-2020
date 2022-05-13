@@ -1,0 +1,34 @@
+using ClassScheduleApi.Adapters;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+
+builder.Services.AddSingleton<ScheduleAdapter>();
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseAuthorization();
+
+app.MapControllers();
+app.UseStatusCodePages(async context =>
+{
+    var code = context.HttpContext.Response.StatusCode;
+    if(code == 404)
+    {
+        global::System.Console.WriteLine(context.HttpContext.Request.Path);
+    }
+});
+
+app.Run();

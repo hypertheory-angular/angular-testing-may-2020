@@ -1,0 +1,78 @@
+# tye application configuration file
+# read all about it at https://github.com/dotnet/tye
+#
+# when you've given us a try, we'd love to know what you think:
+#    https://aka.ms/AA7q20u
+#
+# define global settings here
+# name: exampleapp # application name
+# registry: exampleuser # dockerhub username or container registry hostname
+
+# define multiple services here
+name: angular-testing
+extensions:
+  - name: dapr
+ingress:
+  - name: ingress
+    bindings:
+      - port: 1337
+    rules:
+      - path: /api/course-catalog
+        service: courses-api
+      - path: /api/scheduling
+        service: schedule-api
+      - host: dev.localhost
+        service: mongo-express
+
+services:
+- name: schedule-api
+  project: .\backend\ClassScheduleApi\ClassScheduleApi.csproj
+  bindings:
+    - port: 1339
+
+- name: courses-api
+  project: .\backend\CoursesApi\CoursesApi.csproj
+  bindings:
+    - port: 1340
+
+# Support 
+- name: mongodb
+  image: mongo
+  env: 
+    - name: MONGO_INITDB_ROOT_USERNAME
+      value: admin
+    - name: MONGO_INITDB_ROOT_PASSWORD
+      value: TokyoJoe138!
+  bindings:
+    - port: 27017
+  volumes:
+    - source: data/
+      target: /data/db
+
+- name: mongo-express
+  image: mongo-express
+  bindings:
+    - containerPort: 8081
+      port: 8081
+      protocol: http
+  env:
+    - name: ME_CONFIG_MONGODB_ADMINUSERNAME
+      value: admin
+    - name: ME_CONFIG_MONGODB_ADMINPASSWORD
+      value: TokyoJoe138!
+    - name: ME_CONFIG_MONGODB_URL
+      value: mongodb://admin:TokyoJoe138!@mongodb:27017
+
+# - name: proxy
+#   project: .\backend\Proxy\Proxy.csproj
+#   bindings:
+#     - port: 1337
+  # project: app.csproj # msbuild project path (relative to this file)
+  # executable: app.exe # path to an executable (relative to this file)
+  # args: --arg1=3 # arguments to pass to the process
+  # replicas: 5 # number of times to launch the application
+  # env: # array of environment variables
+  #  - name: key
+  #    value: value
+  # bindings: # optional array of bindings (ports, connection strings)
+    # - port: 8080 # number port of the binding

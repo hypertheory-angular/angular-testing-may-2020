@@ -1,6 +1,6 @@
-{"container":"mongodb_5178bbfe-5"}
-{"container":"mongo-express_aefdb436-b"}
-{"container":"schedule-api-proxy_34a9249e-b"}
-{"container":"courses-api-proxy_29ae4698-1"}
-{"container":"schedule-api-dapr-proxy_bfed95e7-b"}
-{"container":"courses-api-dapr-proxy_2696fb9c-f"}
+{"container":"mongodb_fcaa0c82-4"}
+{"container":"mongo-express_26145466-4"}
+{"container":"schedule-api-proxy_e815a98b-8"}
+{"container":"courses-api-proxy_9d2117bd-b"}
+{"container":"schedule-api-dapr-proxy_661eaec0-f"}
+{"container":"courses-api-dapr-proxy_39e0e9ac-f"}

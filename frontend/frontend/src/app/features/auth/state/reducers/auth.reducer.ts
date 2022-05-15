@@ -6,7 +6,7 @@ export interface AuthState {
 }
 
 const initialState: AuthState = {
-  userName: 'Jeff',
+  // userName: 'Jeff',
 };
 
 export const reducer = createReducer(

@@ -8,11 +8,9 @@ import { CoursesCommands } from './state/actions/courses.actions';
   templateUrl: './courses.component.html',
   styleUrls: ['./courses.component.css'],
 })
-export class CoursesComponent implements OnInit {
+export class CoursesComponent {
   constructor(store: Store) {
     store.dispatch(CoursesCommands.LoadCourses());
     store.dispatch(ClassesCommands.LoadClasses());
   }
-
-  ngOnInit(): void {}
 }

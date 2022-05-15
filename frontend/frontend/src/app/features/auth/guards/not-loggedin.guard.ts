@@ -6,7 +6,7 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { map, Observable, tap } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { selectUserIsAuthenticated } from '../state';
 
 @Injectable()

@@ -25,7 +25,6 @@ export class ClassesEffects {
                 } as ClassesEntity)
             )
           ),
-          tap((x) => console.log(x)),
           map((payload) => ClassesDocuments.Classes({ payload }))
         )
       )

@@ -11,6 +11,7 @@ import { UserIsNotAuthenticatedGuard } from './guards/not-loggedin.guard';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './state/effects/auth.effects';
 
+// This is faked auth.
 @NgModule({
   declarations: [LoginFormComponent, UserStatusComponent],
   imports: [

@@ -14,6 +14,7 @@ import { ClassesEffects } from './state/effects/classes.effects';
 import { AuthModule } from '../auth/auth.module';
 import { UserIsAuthenticatedGuard } from '../auth/guards/auth.guard';
 import { ReactiveComponentModule } from '@ngrx/component';
+import { CourseListComponent } from './components/course-list/course-list.component';
 const routes: Routes = [
   {
     path: '',
@@ -31,7 +32,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [CoursesComponent, ListComponent, EnrollComponent],
+  declarations: [CoursesComponent, ListComponent, EnrollComponent, CourseListComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

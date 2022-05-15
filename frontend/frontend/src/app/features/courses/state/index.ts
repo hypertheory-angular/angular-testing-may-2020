@@ -5,6 +5,8 @@ import {
 } from '@ngrx/store';
 import * as fromCourses from './reducers/courses.reducer';
 import * as fromClasses from './reducers/classes.reducer';
+import { CourseEnrollmentViewModel } from '../models';
+import { selectUserName } from '../../auth/state';
 export const featureName = 'featureCourses';
 
 export interface CoursesState {
@@ -35,8 +37,28 @@ export const selectAllCourses = selectAllCoursesArray;
 export const selectCourseById = (id: string) =>
   createSelector(selectCourseEntities, (entities) => entities[id]);
 
-export const selectClassDatesById = (id: string) =>
+export const selectClassDatesById = (courseId: string) =>
   createSelector(
     selectAllClassesEntities,
-    (entities) => entities[id]?.offerings
+    (entities) => entities[courseId]?.offerings
+  );
+
+export const selectCourseEnrollmentViewModel = (courseId: string) =>
+  createSelector(
+    selectCourseEntities,
+    selectAllClassesEntities,
+    selectUserName,
+    (courses, classes, user) => {
+      const course = courses[courseId];
+      const offerings = classes[courseId]?.offerings || [];
+      if (course) {
+        return {
+          course: course,
+          dates: offerings,
+          user,
+        } as CourseEnrollmentViewModel;
+      } else {
+        return undefined;
+      }
+    }
   );
